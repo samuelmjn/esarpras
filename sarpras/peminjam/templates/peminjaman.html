@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<title>E-Sarana dan Prasarana SMAN 8</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css">
+<body>
+
+<!-- Side Navigation -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-center" style="display:none" id="mySidebar">
+  <h1 class="w3-xxxlarge w3-text-theme">Menu</h1>
+  <a href="/" class="w3-bar-item w3-button">Home</a>
+  <a href="/items" class="w3-bar-item w3-button">Jenis Prasarana yang Tersedia</a>
+  <a href="/cari" class="w3-bar-item w3-button">Waiting List</a>
+  <a href="/peminjaman" class="w3-bar-item w3-button">Peminjaman</a>
+  <button class="w3-bar-item w3-button" onclick="w3_close()">Close <i class="fa fa-remove"></i></button>
+</nav>
+
+<!-- Header -->
+<header class="w3-container w3-theme w3-padding" id="myHeader">
+  <i onclick="w3_open()" class="fa fa-bars w3-xlarge w3-button w3-theme"></i> 
+  <div class="w3-center">
+  <h4>Sekolah Menengah Atas 8 Jakarta</h4>
+  <h1 class="w3-xxxlarge w3-animate-bottom">Peminjaman</h1>
+  </div>
+</header>
+
+
+<div class="w3-row-padding w3-center w3-margin-top">
+
+<div class="w3-center">
+  <div class="w3-card w3-container" style="min-height:460px">
+  <h1>Form Peminjaman Sarana Prasarana</h1><br>
+  <p>
+        <form action="/save/" method="POST" name="form">
+        {% csrf_token %}
+        <div class="w3-section">      
+                <input name="nis" id="nis" class="w3-input" type="number" required>
+                <label>NIS</label>
+              </div>
+              <div class="w3-section">      
+                <input name="nama" id="nama" class="w3-input" type="text" required>
+                <label>Nama</label>
+              </div>
+              <div class="w3-section">      
+                <input name="nohp" id="nohp" class="w3-input" type="number" required>
+                <label>Nomor HP</label>
+              </div>
+              <div class="w3-section">      
+                    <select name="item" class="w3-input">
+                        {% for obj in objects %}
+                        <option value="{{obj.id}}">{{obj.nama}}</option>
+                        {% endfor %}
+                    </select>
+                <label>Barang yang dipinjam</label>
+              </div>
+               
+              <div class="w3-section">      
+                <input name="kegunaan" id="kegunaan" class="w3-input" type="text" required>
+                <label>Kegunaan</label>
+              </div>
+
+               <div class="w3-section">      
+                <input name="tanggal" id="tanggal" class="w3-input" type="date" required>
+                <label>Tanggal</label>
+              </div>
+
+              <div class="w3-section">      
+                  <input name="waktu" id="waktu" class="w3-input" type="time" required>
+                  <label>Waktu</label>
+                </div>
+
+              <p> Pilih Instansi / Organisasi anda <p>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="RHS" checked>
+                    <label>Rohani Islam</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="RKS" checked>
+                    <label>Rohani Kristen</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="RKT" checked>
+                    <label>Rohani Katolik</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="SIR" checked>
+                    <label>Siera</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="PUA" checked>
+                    <label>PUAPALA</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="PRA" checked>
+                    <label>PRAMUKA</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="KMS" checked>
+                    <label>Kemasyarakatan</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="MES" checked>
+                    <label>MESIS</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="KPS" checked>
+                    <label>Koperasi Siswa</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="SP" checked>
+                    <label>Sains dan Perpustakaan</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="OR" checked>
+                    <label>Olahraga</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="PMR" checked>
+                    <label>Palang Merah Remaja</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="ART" checked>
+                    <label>Kesenian</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="TX" checked>
+                    <label>Teknologi dan Soundsystem</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="GEN" checked>
+                    <label>GENESYS</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="JC" checked>
+                    <label>Japanese Club</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="SC" checked>
+                    <label>Study Club</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="ALU" checked>
+                    <label>Alumni</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="PO" checked>
+                    <label>Pengurus OSIS</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="PK" checked>
+                    <label>Perwakilan Kelas</label>
+                    <br>
+                    <input id="jabatan" class="w3-radio" type="radio" name="jabatan" value="DLL" checked>
+                    <label>Lain - lain</label><br><br>
+                    <button type="submit" onclick="document.getElementById('login').submit(); return false;">Ajukan</button>
+              </form>
+  </p>
+  </div>
+</div>
+</div> 
+
+<!-- Footer -->
+<footer class="w3-container w3-theme-dark w3-padding-16">
+  <p>Website by <a href="Instagram.com/teksound8" target="_blank">Ekstrakurikuler Teknologi dan Soundsystem SMAN 8 Jakarta</a></p>
+  <div style="position:relative;bottom:55px;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-theme-light w3-padding">Go To Top</span>    
+    <a class="w3-text-white" href="#myHeader"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+
+<!-- Script for Sidebar, Tabs, Accordions, Progress bars and slideshows -->
+<script>
+// Side navigation
+function w3_open() {
+    var x = document.getElementById("mySidebar");
+    x.style.width = "50%";
+    x.style.height = "65%";
+    x.style.fontSize = "20px";
+    x.style.paddingTop = "0%";
+    x.style.display = "block";
+}
+function w3_close() {
+    document.getElementById("mySidebar").style.display = "none";
+}
+
+// Tabs
+function openCity(evt, cityName) {
+  var i;
+  var x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  var activebtn = document.getElementsByClassName("testbtn");
+  for (i = 0; i < x.length; i++) {
+      activebtn[i].className = activebtn[i].className.replace(" w3-dark-grey", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " w3-dark-grey";
+}
+
+var mybtn = document.getElementsByClassName("testbtn")[0];
+mybtn.click();
+
+// Accordions
+function myAccFunc(id) {
+    var x = document.getElementById(id);
+    if (x.className.indexOf("w3-show") == -1) {
+        x.className += " w3-show";
+    } else { 
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+
+// Slideshows
+var slideIndex = 1;
+
+function plusDivs(n) {
+slideIndex = slideIndex + n;
+showDivs(slideIndex);
+}
+
+function showDivs(n) {
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+
+showDivs(1);
+
+// Progress Bars
+function move() {
+  var elem = document.getElementById("myBar");   
+  var width = 5;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (width == 100) {
+      clearInterval(id);
+    } else {
+      width++; 
+      elem.style.width = width + '%'; 
+      elem.innerHTML = width * 1  + '%';
+    }
+  }
+}
+</script>
+
+</body>
+</html>
